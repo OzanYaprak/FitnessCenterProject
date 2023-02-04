@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Antreman.Models.FitnessCenter>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FitnessCenterName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FitnessCenterAdress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Capacity)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.District)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FitnessCenterName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FitnessCenterAdress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Capacity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.District.DistrictName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.FitnessCenterID">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.FitnessCenterID">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.FitnessCenterID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
