@@ -16,9 +16,29 @@ namespace Antreman.Data
         public DbSet<District> Districts { get; set; }
         public DbSet<FitnessCenter> FitnessCenters { get; set; }
         public DbSet<FitnessCenterSubCat> FitnessCenterSubCats { get; set; }
+        public DbSet<Userr> Userrs { get; set; }
+        public DbSet<Rolee> Rolees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Rolee>().HasData
+                (
+                    new Rolee {RoleeID=1, RoleeName="Aday"},
+                    new Rolee {RoleeID=2, RoleeName="Uye"},
+                    new Rolee {RoleeID=3, RoleeName="Admin"},
+                    new Rolee {RoleeID=4, RoleeName="Supervisor"}
+                );
+
+            modelBuilder.Entity<Userr>().HasData
+                (
+                    new Userr { UserrID=1, Emaill="aday@gmail.com", Passwordd="123456", RoleeID=1},
+                    new Userr { UserrID=2, Emaill="uye@gmail.com", Passwordd="123456", RoleeID=2},
+                    new Userr { UserrID=3, Emaill="uye2@gmail.com", Passwordd="123456", RoleeID=2},
+                    new Userr { UserrID=4, Emaill="admin@gmail.com", Passwordd="123456", RoleeID=3},
+                    new Userr { UserrID=5, Emaill="supervisor@gmail.com", Passwordd="123456", RoleeID=4}
+
+                );
+
             modelBuilder.Entity<Gender>().HasData
                 (
                    new Gender { GenderID = 1, GenderName = "Kadın" },
