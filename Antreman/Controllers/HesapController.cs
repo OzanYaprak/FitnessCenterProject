@@ -34,9 +34,9 @@ namespace Antreman.Controllers
             {
                 ClaimsIdentity identityy = null;
                 bool isAuthenticated = false;
-                Userr userr = await _context.Userrs.Include(a => a.Rolee).FirstOrDefaultAsync(b => b.Email == userr.Email && b.Password == userr.Passwordd);
+                Userr userrr = await _context.Userrs.Include(k => k.Rolee).FirstOrDefaultAsync(m => m.Emaill == userr.Emaill && m.Passwordd == userr.Passwordd);
 
-                if (userr = null)
+                if (userrr == null)
                 {
                     ModelState.AddModelError("", "Kullanıcı Bulunamadı");
                     return View(userr);
@@ -45,9 +45,9 @@ namespace Antreman.Controllers
                 identityy = new ClaimsIdentity
                     (new[]
                             {
-                                new Claim(ClaimTypes.Sid,userr.UserrID.ToString()),
-                                new Claim(ClaimTypes.Email,userr.Emaill),
-                                new Claim(ClaimTypes.Role,userr.Rolee.RoleeName),
+                                new Claim(ClaimTypes.Sid,userrr.UserrID.ToString()),
+                                new Claim(ClaimTypes.Email,userrr.Emaill),
+                                new Claim(ClaimTypes.Role,userrr.Rolee.RoleeName),
                             }, CookieAuthenticationDefaults.AuthenticationScheme
                     );
 
@@ -65,19 +65,19 @@ namespace Antreman.Controllers
 
                         );
 
-                    if (userr.Rolee.RoleeName == "Aday")
+                    if (userrr.Rolee.RoleeName == "Aday")
                     {
                         return Redirect("~/Hesap/EpostaOnayHatirlatmasi");
                     }
-                    else if (userr.Rolee.RoleeName == "Uye")
+                    else if (userrr.Rolee.RoleeName == "Uye")
                     {
                         return RedirectToAction("", "");
                     }
-                    else if (userr.Rolee.RoleeName == "Admin")
+                    else if (userrr.Rolee.RoleeName == "Admin")
                     {
                         return Redirect("~/AdminAnasayfa/Index");
                     }
-                    else if (userr.Rolee.RoleeName == "Supervisor")
+                    else if (userrr.Rolee.RoleeName == "Supervisor")
                     {
                         return Redirect("~/AdminAnasayfa/Index");
                     }
@@ -112,7 +112,7 @@ namespace Antreman.Controllers
         public IActionResult KayitOl()
         {
             Userr userr = new Userr();
-            return View();
+            return View(userr);
         }
 
         [HttpPost]
@@ -122,7 +122,7 @@ namespace Antreman.Controllers
             userr.RoleeID = 1;
             Userr selectedUserr = await _context.Userrs.FirstOrDefaultAsync(a => a.Emaill == userr.Emaill);
 
-            if (selectedUserr!=null)
+            if (selectedUserr != null)
             {
                 ModelState.AddModelError("", "Eposta zaten kullanımda.");
             }
@@ -134,16 +134,16 @@ namespace Antreman.Controllers
 
                 EmailOperations.SendActivationMail(userr.Emaill);
 
-                return RedirectToAction("Giris", "Hesap");   
+                return RedirectToAction("Giris", "Hesap");
             }
             return View(userr);
         }
-        public IActionResult SifremiUnuttum() 
+        public IActionResult SifremiUnuttum()
         {
-            return View(); 
+            return View();
         }
 
-        public IActionResult Cikis() 
+        public IActionResult Cikis()
         {
             var giris = HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("", "");

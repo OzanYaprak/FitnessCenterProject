@@ -25,8 +25,6 @@
                     </form>
                 </div>
 
-
-
                 <div class="cs-filter_widget">
                     <h2 class="cs-filter_toggle_btn">
                         Kategoriler
@@ -49,7 +47,6 @@
                                         else
                                         {
                                             <input class="form-check-input" type="radio" value="https://localhost:7016?kat=@(category.CategoryID)" onclick="window.open(this.value, '_self')" name="category" id="Category">
-
                                         }
 
                                         <label class="form-check-label" for="Category">@category.CategoryName</label>
@@ -170,14 +167,14 @@
             </div>
         </div>
         <div class="cs-sidebar_frame_right">
-            <div class="cs-filter_head">
-                <div class="cs-filter_head_left">
-                    <span class="cs-search_result cs-medium cs-ternary_color">29064886 Results</span>
-                    <div class="cs-form_field_wrap">
-                        <input type="text" class="cs-form_field cs-field_sm" placeholder="In Auction">
-                    </div>
-                    <a href="#" class="cs-clear_btn">Clear All</a>
+            <div class="cs-filter_head" style="justify-content:end;">
+                @*                <div class="cs-filter_head_left">
+                <span class="cs-search_result cs-medium cs-ternary_color">29064886 Results</span>
+                <div class="cs-form_field_wrap">
+                <input type="text" class="cs-form_field cs-field_sm" placeholder="In Auction">
                 </div>
+                <a href="#" class="cs-clear_btn">Clear All</a>
+                </div>*@
                 <div class="cs-filter_head_right">
                     <div class="cs-form_field_wrap cs-select_arrow">
                         <select class="cs-form_field cs-field_sm" onchange="if (this.value) window.location.href=this.value">

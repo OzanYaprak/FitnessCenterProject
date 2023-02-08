@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Antreman.Migrations
 {
     [DbContext(typeof(antremanDBContext))]
-    [Migration("20230204134245_iki")]
-    partial class iki
+    [Migration("20230205221927_bir")]
+    partial class bir
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1435,12 +1435,12 @@ namespace Antreman.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserrID"));
 
-                    b.Property<string>("Email")
+                    b.Property<string>("Emaill")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("Passwordd")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -1458,36 +1458,36 @@ namespace Antreman.Migrations
                         new
                         {
                             UserrID = 1,
-                            Email = "aday@gmail.com",
-                            Password = "123456",
+                            Emaill = "aday@gmail.com",
+                            Passwordd = "123456",
                             RoleeID = (byte)1
                         },
                         new
                         {
                             UserrID = 2,
-                            Email = "uye@gmail.com",
-                            Password = "123456",
+                            Emaill = "uye@gmail.com",
+                            Passwordd = "123456",
                             RoleeID = (byte)2
                         },
                         new
                         {
                             UserrID = 3,
-                            Email = "uye2@gmail.com",
-                            Password = "123456",
+                            Emaill = "uye2@gmail.com",
+                            Passwordd = "123456",
                             RoleeID = (byte)2
                         },
                         new
                         {
                             UserrID = 4,
-                            Email = "admin@gmail.com",
-                            Password = "123456",
+                            Emaill = "admin@gmail.com",
+                            Passwordd = "123456",
                             RoleeID = (byte)3
                         },
                         new
                         {
                             UserrID = 5,
-                            Email = "supervisor@gmail.com",
-                            Password = "123456",
+                            Emaill = "supervisor@gmail.com",
+                            Passwordd = "123456",
                             RoleeID = (byte)4
                         });
                 });

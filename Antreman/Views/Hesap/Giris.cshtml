@@ -1,0 +1,70 @@
+﻿@model  LoginViewModel
+
+
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="ThemeMarch">
+    <!-- Site Title -->
+    <title>Login</title>
+    <link rel="stylesheet" href="~/client/assets/css/plugins/fontawesome.min.css">
+    <link rel="stylesheet" href="~/client/assets/css/plugins/bootstrap.min.css">
+    <link rel="stylesheet" href="~/client/assets/css/plugins/slick.css">
+    <link rel="stylesheet" href="~/client/assets/css/style.css">
+</head>
+
+<body>
+
+    <div class="cs-preloader cs-center">
+        <div class="cs-preloader_in"></div>
+        <span>Loading</span>
+    </div>
+
+
+    <div class="cs-height_100 cs-height_lg_70"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-6 col-md-8 offset-xl-3 offset-md-2">
+
+
+                <form asp-controller="Hesap" asp-action="Giris" class="cs-form_card cs-style1 cs-box_shadow cs-white_bg">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="cs-form_card_in">
+                        <h2 class="cs-form_title text-center">Giriş</h2>
+
+                        <div class="cs-height_30 cs-height_lg_30"></div>
+                        <div class="cs-form_field_wrap">
+                            <input name="Emaill" type="email" class="cs-form_field" placeholder="E-posta">
+                        </div>
+                        <div class="cs-height_20 cs-height_lg_20"></div>
+                        <div class="cs-form_field_wrap">
+                            <input name="Passwordd" type="password" class="cs-form_field" placeholder="Sifre">
+                        </div>
+
+                        <div class="cs-height_20 cs-height_lg_20"></div>
+                        <input type="submit" class="cs-btn cs-style1 cs-btn_lg w-100" id="LoginButton" value="Giris">
+
+
+                        <div class="cs-height_30 cs-height_lg_30"></div>
+                        <div class="cs-form_footer text-center">Yeni Hesap Oluştur <a asp-controller="Hesap" asp-action="KayitOl">Kayıt Ol</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Script -->
+    <script src="~/client/assets/js/plugins/jquery-3.6.0.min.js"></script>
+    <script src="~/client/assets/js/plugins/isotope.pkg.min.js"></script>
+    <script src="~/client/assets/js/plugins/jquery.slick.min.js"></script>
+    <script src="~/client/assets/js/main.js"></script>
+
+</body>
+</html>

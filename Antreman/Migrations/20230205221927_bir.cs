@@ -52,6 +52,18 @@ namespace Antreman.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Rolees",
+                columns: table => new
+                {
+                    RoleeID = table.Column<byte>(type: "tinyint", nullable: false),
+                    RoleeName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rolees", x => x.RoleeID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SubCategories",
                 columns: table => new
                 {
@@ -88,6 +100,27 @@ namespace Antreman.Migrations
                         column: x => x.CityID,
                         principalTable: "Cities",
                         principalColumn: "CityID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Userrs",
+                columns: table => new
+                {
+                    UserrID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Emaill = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Passwordd = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    RoleeID = table.Column<byte>(type: "tinyint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Userrs", x => x.UserrID);
+                    table.ForeignKey(
+                        name: "FK_Userrs_Rolees_RoleeID",
+                        column: x => x.RoleeID,
+                        principalTable: "Rolees",
+                        principalColumn: "RoleeID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -178,6 +211,17 @@ namespace Antreman.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Rolees",
+                columns: new[] { "RoleeID", "RoleeName" },
+                values: new object[,]
+                {
+                    { (byte)1, "Aday" },
+                    { (byte)2, "Uye" },
+                    { (byte)3, "Admin" },
+                    { (byte)4, "Supervisor" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Districts",
                 columns: new[] { "DistrictID", "CityID", "DistrictName" },
                 values: new object[,]
@@ -248,6 +292,18 @@ namespace Antreman.Migrations
                     { 11, 2, "Kas Kazanmak" },
                     { 12, 2, "Formu Korumak" },
                     { 13, 2, "Dayanıklılığı Arttırmak" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Userrs",
+                columns: new[] { "UserrID", "Emaill", "Passwordd", "RoleeID" },
+                values: new object[,]
+                {
+                    { 1, "aday@gmail.com", "123456", (byte)1 },
+                    { 2, "uye@gmail.com", "123456", (byte)2 },
+                    { 3, "uye2@gmail.com", "123456", (byte)2 },
+                    { 4, "admin@gmail.com", "123456", (byte)3 },
+                    { 5, "supervisor@gmail.com", "123456", (byte)4 }
                 });
 
             migrationBuilder.InsertData(
@@ -376,6 +432,11 @@ namespace Antreman.Migrations
                 name: "IX_SubCategories_CategoryID",
                 table: "SubCategories",
                 column: "CategoryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Userrs_RoleeID",
+                table: "Userrs",
+                column: "RoleeID");
         }
 
         /// <inheritdoc />
@@ -388,10 +449,16 @@ namespace Antreman.Migrations
                 name: "Genders");
 
             migrationBuilder.DropTable(
+                name: "Userrs");
+
+            migrationBuilder.DropTable(
                 name: "FitnessCenters");
 
             migrationBuilder.DropTable(
                 name: "SubCategories");
+
+            migrationBuilder.DropTable(
+                name: "Rolees");
 
             migrationBuilder.DropTable(
                 name: "Districts");
