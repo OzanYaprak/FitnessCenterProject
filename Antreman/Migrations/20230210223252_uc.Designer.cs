@@ -4,6 +4,7 @@ using Antreman.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Antreman.Migrations
 {
     [DbContext(typeof(antremanDBContext))]
-    partial class antremanDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230210223252_uc")]
+    partial class uc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1478,61 +1481,6 @@ namespace Antreman.Migrations
                             SubCategoryID = 13,
                             CategoryID = 2,
                             SubCategoryName = "Dayanıklılığı Arttırmak"
-                        });
-                });
-
-            modelBuilder.Entity("Antreman.Models.Trainer", b =>
-                {
-                    b.Property<int>("TrainerID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrainerID"));
-
-                    b.Property<string>("TrainerNameAndSurname")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("TrainerID");
-
-                    b.ToTable("Trainers");
-
-                    b.HasData(
-                        new
-                        {
-                            TrainerID = 1,
-                            TrainerNameAndSurname = "Aslı Hisar"
-                        },
-                        new
-                        {
-                            TrainerID = 2,
-                            TrainerNameAndSurname = "Ogün Güçlü"
-                        },
-                        new
-                        {
-                            TrainerID = 3,
-                            TrainerNameAndSurname = "Melis Yaprak"
-                        },
-                        new
-                        {
-                            TrainerID = 4,
-                            TrainerNameAndSurname = "Ayça Güneri"
-                        },
-                        new
-                        {
-                            TrainerID = 5,
-                            TrainerNameAndSurname = "Zuhal Gün"
-                        },
-                        new
-                        {
-                            TrainerID = 6,
-                            TrainerNameAndSurname = "Ali Koyun"
-                        },
-                        new
-                        {
-                            TrainerID = 7,
-                            TrainerNameAndSurname = "Hakan Taşıyıcı"
                         });
                 });
 

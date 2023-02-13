@@ -12,5 +12,6 @@ namespace Antreman.ViewModels
         public int? SelectedCityID { get; set; }
         public SubCategory? SelectedSubCategory  { get; set; }
         public List<FitnessCenter> FitnessCenterList { get; set;}
+        public List<Favoritee> MyFavoriteeList  { get; set;}
     }
 }

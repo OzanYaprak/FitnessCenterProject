@@ -4,6 +4,7 @@ using Antreman.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Antreman.Migrations
 {
     [DbContext(typeof(antremanDBContext))]
-    partial class antremanDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230208151633_iki")]
+    partial class iki
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,37 +138,6 @@ namespace Antreman.Migrations
                             CityID = 55,
                             CityName = "Samsun"
                         });
-                });
-
-            modelBuilder.Entity("Antreman.Models.Commentt", b =>
-                {
-                    b.Property<int>("CommenttID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommenttID"));
-
-                    b.Property<DateTime>("CommenttDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CommenttText")
-                        .IsRequired()
-                        .HasMaxLength(400)
-                        .HasColumnType("nvarchar(400)");
-
-                    b.Property<int>("FitnessCenterID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserrID")
-                        .HasColumnType("int");
-
-                    b.HasKey("CommenttID");
-
-                    b.HasIndex("FitnessCenterID");
-
-                    b.HasIndex("UserrID");
-
-                    b.ToTable("Commentts");
                 });
 
             modelBuilder.Entity("Antreman.Models.District", b =>
@@ -1481,61 +1453,6 @@ namespace Antreman.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Antreman.Models.Trainer", b =>
-                {
-                    b.Property<int>("TrainerID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrainerID"));
-
-                    b.Property<string>("TrainerNameAndSurname")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("TrainerID");
-
-                    b.ToTable("Trainers");
-
-                    b.HasData(
-                        new
-                        {
-                            TrainerID = 1,
-                            TrainerNameAndSurname = "Aslı Hisar"
-                        },
-                        new
-                        {
-                            TrainerID = 2,
-                            TrainerNameAndSurname = "Ogün Güçlü"
-                        },
-                        new
-                        {
-                            TrainerID = 3,
-                            TrainerNameAndSurname = "Melis Yaprak"
-                        },
-                        new
-                        {
-                            TrainerID = 4,
-                            TrainerNameAndSurname = "Ayça Güneri"
-                        },
-                        new
-                        {
-                            TrainerID = 5,
-                            TrainerNameAndSurname = "Zuhal Gün"
-                        },
-                        new
-                        {
-                            TrainerID = 6,
-                            TrainerNameAndSurname = "Ali Koyun"
-                        },
-                        new
-                        {
-                            TrainerID = 7,
-                            TrainerNameAndSurname = "Hakan Taşıyıcı"
-                        });
-                });
-
             modelBuilder.Entity("Antreman.Models.Userr", b =>
                 {
                     b.Property<int>("UserrID")
@@ -1599,25 +1516,6 @@ namespace Antreman.Migrations
                             Passwordd = "123456",
                             RoleeID = (byte)4
                         });
-                });
-
-            modelBuilder.Entity("Antreman.Models.Commentt", b =>
-                {
-                    b.HasOne("Antreman.Models.FitnessCenter", "FitnessCenter")
-                        .WithMany()
-                        .HasForeignKey("FitnessCenterID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Antreman.Models.Userr", "Userr")
-                        .WithMany()
-                        .HasForeignKey("UserrID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FitnessCenter");
-
-                    b.Navigation("Userr");
                 });
 
             modelBuilder.Entity("Antreman.Models.District", b =>

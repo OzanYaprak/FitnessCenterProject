@@ -1,6 +1,7 @@
 ﻿using Antreman.Data;
 using Antreman.Models;
 using Antreman.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -18,7 +19,11 @@ namespace Antreman.Controllers
 
         public async Task<IActionResult> Index(int? kat, int? il, int? ilce, int? altkat, string sira,string aranan)
         {
+            int MyUserrID = Convert.ToInt32(User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Sid)?.Value);
+
             HomeViewModel x = new HomeViewModel();
+
+
             x.CategoryList = await _context.Categories.ToListAsync();
 
             x.SelectedSubCategory = await _context.SubCategories.FirstOrDefaultAsync(a => a.SubCategoryID == altkat);
@@ -61,7 +66,7 @@ namespace Antreman.Controllers
                         OrderBy(a => a.FitnessCenterName).
                         Include(a => a.District).
                         ThenInclude(a=>a.City).
-                        Take(12).ToListAsync();
+                        Take(20).ToListAsync();
             }
             else if (sira=="azalan")
             {
@@ -73,7 +78,7 @@ namespace Antreman.Controllers
                         OrderByDescending(a => a.FitnessCenterName).
                         Include(a => a.District).
                         ThenInclude(a => a.City).
-                        Take(12).ToListAsync();
+                        Take(20).ToListAsync();
             }
             else if (sira== "ilceartan")
             {
@@ -85,7 +90,7 @@ namespace Antreman.Controllers
                         OrderBy(a => a.District.DistrictID).
                         Include(a => a.District).
                         ThenInclude(a => a.City).
-                        Take(12).ToListAsync();
+                        Take(20).ToListAsync();
             }
             else if (sira == "ilceazalan")
             {
@@ -97,7 +102,7 @@ namespace Antreman.Controllers
                         OrderByDescending(a => a.District.DistrictID).
                         Include(a => a.District).
                         ThenInclude(a => a.City).
-                        Take(12).ToListAsync();
+                        Take(20).ToListAsync();
             }
             else
             {
@@ -108,8 +113,12 @@ namespace Antreman.Controllers
                         Where(a => a.FitnessCenterName.Contains(aranan) || aranan == null).
                         Include(a => a.District).
                         ThenInclude(a => a.City).
-                        Take(12).ToListAsync();
+                        Take(20).ToListAsync();
             }
+
+            
+
+            x.MyFavoriteeList = await _context.Favoritees.Where(a => a.UserrID == MyUserrID).ToListAsync();
 
             return View(x);
         }
@@ -120,6 +129,38 @@ namespace Antreman.Controllers
             return RedirectToAction("", "", new {aranan=arananMetin});
         }
 
+        [Authorize(Roles ="Uye")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> FavoriEkle(int fitid)
+        {
+            int MyUserrID = Convert.ToInt32(User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Sid)?.Value);
+            Favoritee favoritee = new Favoritee() { FitnessCenterID = fitid, UserrID = MyUserrID, FavoriteeDate = DateTime.Now };
+            await _context.Favoritees.AddAsync(favoritee);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("","");
+        }
+
+
+        public async Task<IActionResult> FavoriKaldir(int fitid)
+        {
+            int MyUserrID = Convert.ToInt32(User.FindFirst(claim => claim.Type == System.Security.Claims.ClaimTypes.Sid)?.Value);
+            Favoritee favoritee = await _context.Favoritees.FirstOrDefaultAsync(a=>a.UserrID==MyUserrID && a.FitnessCenterID==fitid);
+            _context.Favoritees.Remove(favoritee);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("", "");
+        }
+
+
+
+
+        
+
+
+
+
+
+
 
 
 
@@ -129,19 +170,6 @@ namespace Antreman.Controllers
         {
             return View();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

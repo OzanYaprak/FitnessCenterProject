@@ -18,6 +18,9 @@ namespace Antreman.Data
         public DbSet<FitnessCenterSubCat> FitnessCenterSubCats { get; set; }
         public DbSet<Userr> Userrs { get; set; }
         public DbSet<Rolee> Rolees { get; set; }
+        public DbSet<Favoritee> Favoritees { get; set; }
+        public DbSet<Commentt> Commentts { get; set; }
+        public DbSet<Trainer> Trainers { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -38,9 +41,18 @@ namespace Antreman.Data
                     new Userr { UserrID = 3, Emaill = "uye2@gmail.com", Passwordd = "123456", RoleeID = 2 },
                     new Userr { UserrID = 4, Emaill = "admin@gmail.com", Passwordd = "123456", RoleeID = 3 },
                     new Userr { UserrID = 5, Emaill = "supervisor@gmail.com", Passwordd = "123456", RoleeID = 4 }
-
                 );
 
+            modelBuilder.Entity<Trainer>().HasData
+                (
+                    new Trainer {TrainerID=1, TrainerNameAndSurname="Aslı Hisar"},
+                    new Trainer {TrainerID=2, TrainerNameAndSurname="Ogün Güçlü"},
+                    new Trainer {TrainerID=3, TrainerNameAndSurname="Melis Yaprak"},
+                    new Trainer {TrainerID=4, TrainerNameAndSurname="Ayça Güneri"},
+                    new Trainer {TrainerID=5, TrainerNameAndSurname="Zuhal Gün"},
+                    new Trainer {TrainerID=6, TrainerNameAndSurname="Ali Koyun"},
+                    new Trainer {TrainerID=7, TrainerNameAndSurname="Hakan Taşıyıcı"}
+                );
 
             modelBuilder.Entity<Gender>().HasData
                 (
