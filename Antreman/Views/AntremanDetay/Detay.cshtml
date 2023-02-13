@@ -16,13 +16,13 @@
 
                     @if (Model.MyFavoriteeList.Select(a => a.FitnessCenterID).Contains(fitnessCenter.FitnessCenterID))
                     {
-                        <form asp-controller="Home" asp-action="FavoriKaldir" class="cs-card_like cs-primary_color">
+                        <form asp-controller="Home" asp-action="FavoriKaldir" asp-route-fitid="@fitnessCenter.FitnessCenterID" class="cs-card_like cs-primary_color">
                             <button style="border:hidden; background-color:transparent;"><i class="fas fa-heart fa-fw" style="margin:0px;"></i></button>
                         </form>
                     }
                     else
                     {
-                        <form asp-controller="Home" asp-action="FavoriEkle" class="cs-card_like cs-primary_color">
+                        <form asp-controller="Home" asp-action="FavoriEkle" asp-route-fitid="@fitnessCenter.FitnessCenterID" class="cs-card_like cs-primary_color">
                             <button style="border:hidden; background-color:transparent;"><i class="far fa-heart fa-fw" style="margin:0px;"></i></button>
                         </form>
                     }
